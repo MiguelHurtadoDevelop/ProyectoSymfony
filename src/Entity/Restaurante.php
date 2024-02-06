@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RestauranteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RestauranteRepository::class)]
@@ -13,43 +15,35 @@ class Restaurante
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 60)]
+    private ?string $correo = null;
+
+    #[ORM\Column(length: 60)]
+    private ?string $clave = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $pais = null;
+
     #[ORM\Column]
     private ?int $cp = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $correo = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $clave = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $pais = null;
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $ciudad = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $direccion = null;
 
-    #[ORM\ManyToOne(inversedBy: 'restaurante')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Pedidos $restaurante = null;
+    #[ORM\OneToMany(targetEntity: Pedidos::class, mappedBy: 'restaurante', orphanRemoval: true)]
+    private Collection $pedidos;
+
+    public function __construct()
+    {
+        $this->pedidos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCp(): ?int
-    {
-        return $this->cp;
-    }
-
-    public function setCp(int $cp): static
-    {
-        $this->cp = $cp;
-
-        return $this;
     }
 
     public function getCorreo(): ?string
@@ -88,6 +82,18 @@ class Restaurante
         return $this;
     }
 
+    public function getCp(): ?int
+    {
+        return $this->cp;
+    }
+
+    public function setCp(int $cp): static
+    {
+        $this->cp = $cp;
+
+        return $this;
+    }
+
     public function getCiudad(): ?string
     {
         return $this->ciudad;
@@ -112,14 +118,32 @@ class Restaurante
         return $this;
     }
 
-    public function getRestaurante(): ?Pedidos
+    /**
+     * @return Collection<int, Pedidos>
+     */
+    public function getPedidos(): Collection
     {
-        return $this->restaurante;
+        return $this->pedidos;
     }
 
-    public function setRestaurante(?Pedidos $restaurante): static
+    public function addPedido(Pedidos $pedido): static
     {
-        $this->restaurante = $restaurante;
+        if (!$this->pedidos->contains($pedido)) {
+            $this->pedidos->add($pedido);
+            $pedido->setRestaurante($this);
+        }
+
+        return $this;
+    }
+
+    public function removePedido(Pedidos $pedido): static
+    {
+        if ($this->pedidos->removeElement($pedido)) {
+            // set the owning side to null (unless already changed)
+            if ($pedido->getRestaurante() === $this) {
+                $pedido->setRestaurante(null);
+            }
+        }
 
         return $this;
     }

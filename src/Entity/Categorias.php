@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoriasRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoriasRepository::class)]
@@ -19,9 +21,13 @@ class Categorias
     #[ORM\Column(length: 255)]
     private ?string $descripcion = null;
 
-    #[ORM\ManyToOne(inversedBy: 'categoria')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Productos $categoria = null;
+    #[ORM\OneToMany(targetEntity: Productos::class, mappedBy: 'categoria', orphanRemoval: true)]
+    private Collection $productos;
+
+    public function __construct()
+    {
+        $this->productos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,14 +58,32 @@ class Categorias
         return $this;
     }
 
-    public function getCategoria(): ?Productos
+    /**
+     * @return Collection<int, Productos>
+     */
+    public function getProductos(): Collection
     {
-        return $this->categoria;
+        return $this->productos;
     }
 
-    public function setCategoria(?Productos $categoria): static
+    public function addProducto(Productos $producto): static
     {
-        $this->categoria = $categoria;
+        if (!$this->productos->contains($producto)) {
+            $this->productos->add($producto);
+            $producto->setCategoria($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProducto(Productos $producto): static
+    {
+        if ($this->productos->removeElement($producto)) {
+            // set the owning side to null (unless already changed)
+            if ($producto->getCategoria() === $this) {
+                $producto->setCategoria(null);
+            }
+        }
 
         return $this;
     }

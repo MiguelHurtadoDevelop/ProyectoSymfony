@@ -27,15 +27,19 @@ class Productos
     #[ORM\Column]
     private ?int $stock = null;
 
-    #[ORM\OneToMany(targetEntity: categorias::class, mappedBy: 'categoria')]
-    private Collection $categoria;
-
     #[ORM\Column]
-    private ?float $precio = null;
+    private ?int $precio = null;
+
+    #[ORM\ManyToOne(inversedBy: 'productos')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?categorias $categoria = null;
+
+    #[ORM\OneToMany(targetEntity: Pedidosproductos::class, mappedBy: 'producto', orphanRemoval: true)]
+    private Collection $pedidosproductos;
 
     public function __construct()
     {
-        $this->categoria = new ArrayCollection();
+        $this->pedidosproductos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -91,44 +95,56 @@ class Productos
         return $this;
     }
 
-    /**
-     * @return Collection<int, categorias>
-     */
-    public function getCategoria(): Collection
-    {
-        return $this->categoria;
-    }
-
-    public function addCategorium(categorias $categorium): static
-    {
-        if (!$this->categoria->contains($categorium)) {
-            $this->categoria->add($categorium);
-            $categorium->setCategoria($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategorium(categorias $categorium): static
-    {
-        if ($this->categoria->removeElement($categorium)) {
-            // set the owning side to null (unless already changed)
-            if ($categorium->getCategoria() === $this) {
-                $categorium->setCategoria(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getPrecio(): ?float
+    public function getPrecio(): ?int
     {
         return $this->precio;
     }
 
-    public function setPrecio(float $precio): static
+    public function setPrecio(int $precio): static
     {
         $this->precio = $precio;
+
+        return $this;
+    }
+
+    public function getCategoria(): ?categorias
+    {
+        return $this->categoria;
+    }
+
+    public function setCategoria(?categorias $categoria): static
+    {
+        $this->categoria = $categoria;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pedidosproductos>
+     */
+    public function getPedidosproductos(): Collection
+    {
+        return $this->pedidosproductos;
+    }
+
+    public function addPedidosproducto(Pedidosproductos $pedidosproducto): static
+    {
+        if (!$this->pedidosproductos->contains($pedidosproducto)) {
+            $this->pedidosproductos->add($pedidosproducto);
+            $pedidosproducto->setProducto($this);
+        }
+
+        return $this;
+    }
+
+    public function removePedidosproducto(Pedidosproductos $pedidosproducto): static
+    {
+        if ($this->pedidosproductos->removeElement($pedidosproducto)) {
+            // set the owning side to null (unless already changed)
+            if ($pedidosproducto->getProducto() === $this) {
+                $pedidosproducto->setProducto(null);
+            }
+        }
 
         return $this;
     }

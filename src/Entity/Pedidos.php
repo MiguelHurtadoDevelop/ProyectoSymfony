@@ -22,12 +22,19 @@ class Pedidos
     #[ORM\Column]
     private ?int $enviado = null;
 
-    #[ORM\OneToMany(targetEntity: restaurante::class, mappedBy: 'restaurante')]
-    private Collection $restaurante;
+    #[ORM\ManyToOne(inversedBy: 'pedidos')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Restaurante $restaurante = null;
+
+    #[ORM\OneToMany(targetEntity: Pedidosproductos::class, mappedBy: 'pedido', orphanRemoval: true)]
+    private Collection $pedidosproductos;
+
+    #[ORM\Column]
+    private ?float $precio = null;
 
     public function __construct()
     {
-        $this->restaurante = new ArrayCollection();
+        $this->pedidosproductos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -59,32 +66,56 @@ class Pedidos
         return $this;
     }
 
-    /**
-     * @return Collection<int, restaurante>
-     */
-    public function getRestaurante(): Collection
+    public function getRestaurante(): ?Restaurante
     {
         return $this->restaurante;
     }
 
-    public function addRestaurante(restaurante $restaurante): static
+    public function setRestaurante(?Restaurante $restaurante): static
     {
-        if (!$this->restaurante->contains($restaurante)) {
-            $this->restaurante->add($restaurante);
-            $restaurante->setRestaurante($this);
+        $this->restaurante = $restaurante;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pedidosproductos>
+     */
+    public function getPedidosproductos(): Collection
+    {
+        return $this->pedidosproductos;
+    }
+
+    public function addPedidosproducto(Pedidosproductos $pedidosproducto): static
+    {
+        if (!$this->pedidosproductos->contains($pedidosproducto)) {
+            $this->pedidosproductos->add($pedidosproducto);
+            $pedidosproducto->setPedido($this);
         }
 
         return $this;
     }
 
-    public function removeRestaurante(restaurante $restaurante): static
+    public function removePedidosproducto(Pedidosproductos $pedidosproducto): static
     {
-        if ($this->restaurante->removeElement($restaurante)) {
+        if ($this->pedidosproductos->removeElement($pedidosproducto)) {
             // set the owning side to null (unless already changed)
-            if ($restaurante->getRestaurante() === $this) {
-                $restaurante->setRestaurante(null);
+            if ($pedidosproducto->getPedido() === $this) {
+                $pedidosproducto->setPedido(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPrecio(): ?float
+    {
+        return $this->precio;
+    }
+
+    public function setPrecio(float $precio): static
+    {
+        $this->precio = $precio;
 
         return $this;
     }
