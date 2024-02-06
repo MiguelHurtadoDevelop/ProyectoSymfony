@@ -31,6 +31,10 @@ class Restaurante
     #[ORM\Column(length: 255)]
     private ?string $direccion = null;
 
+    #[ORM\ManyToOne(inversedBy: 'restaurante')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Pedidos $restaurante = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +108,18 @@ class Restaurante
     public function setDireccion(string $direccion): static
     {
         $this->direccion = $direccion;
+
+        return $this;
+    }
+
+    public function getRestaurante(): ?Pedidos
+    {
+        return $this->restaurante;
+    }
+
+    public function setRestaurante(?Pedidos $restaurante): static
+    {
+        $this->restaurante = $restaurante;
 
         return $this;
     }
