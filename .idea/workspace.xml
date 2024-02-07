@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aae3dfab-4332-4474-b274-fc2d52a98fdb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20240207094301.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20240207095635.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20240207100726.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Restaurante.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Restaurante.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +208,7 @@
       <updated>1707249110109</updated>
       <workItem from="1707249111005" duration="1193000" />
       <workItem from="1707250936643" duration="1364000" />
-      <workItem from="1707331571943" duration="328000" />
+      <workItem from="1707331571943" duration="1629000" />
     </task>
     <servers />
   </component>

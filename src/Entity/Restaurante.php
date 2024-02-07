@@ -32,18 +32,12 @@ class Restaurante implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
 
-    #[Assert\Regex(
-        pattern:'/^\d+$/',
-        match:false,
-        message: 'El código postal tiene que contener solo números',
-    )]
     #[ORM\Column]
     private ?int $CP = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Pais = null;
-
-    #[Assert\NotBlank]
+    
     #[ORM\Column(length: 255)]
     private ?string $Direccion = null;
 
