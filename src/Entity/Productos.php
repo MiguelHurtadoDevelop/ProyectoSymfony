@@ -32,7 +32,7 @@ class Productos
 
     #[ORM\ManyToOne(inversedBy: 'productos')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?categorias $categoria = null;
+    private ?Categorias $categoria = null;
 
     #[ORM\OneToMany(targetEntity: Pedidosproductos::class, mappedBy: 'producto', orphanRemoval: true)]
     private Collection $pedidosproductos;
