@@ -37,7 +37,7 @@ class Restaurante implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $Pais = null;
-    
+
     #[ORM\Column(length: 255)]
     private ?string $Direccion = null;
 
