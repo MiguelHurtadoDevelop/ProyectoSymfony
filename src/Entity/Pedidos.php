@@ -54,12 +54,12 @@ class Pedidos
         return $this;
     }
 
-    public function getEnviado(): ?int
+    public function getEnviado(): ?bool
     {
         return $this->enviado;
     }
 
-    public function setEnviado(int $enviado): static
+    public function setEnviado(bool $enviado): static
     {
         $this->enviado = $enviado;
 
