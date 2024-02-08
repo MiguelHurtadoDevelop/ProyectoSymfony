@@ -49,7 +49,7 @@
                                     </li>
                                     
                                 {% endfor %}
-                                <li class="items item1 mx-2"><a class="link" href="{{ path('app_pedidos_show', {'user_id': app.user.id }) }}">Mis Pedidos</a></li>
+                                <li class="items item1 mx-2"><a class="link" href="{{ path('app_misPedidos', {'user_id': app.user.id }) }}">Mis Pedidos</a></li>
                             {% endif %}
                             <li class="items item1 mx-2">
                                 <a class="link" href="/logout">Cerrar Sesión</a>

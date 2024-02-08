@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Entity\Productos;
 
 
-
 #[Route('/pedidos')]
 class PedidosController extends AbstractController
 {
@@ -48,13 +47,11 @@ class PedidosController extends AbstractController
         ]);
     }
 
-    #[Route('/{user_id}', name: 'app_pedidos_show', methods: ['GET'])]
-    public function show($user_id, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}', name: 'app_pedidos_show', methods: ['GET'])]
+    public function show(Pedidos $pedido): Response
     {
-        $pedidos = $entityManager->getRepository(Pedidos::class)->findBy(['restaurante' => $user_id]);
-        
         return $this->render('pedidos/show.html.twig', [
-            'pedidos' => $pedidos,
+            'pedido' => $pedido,
         ]);
     }
 
@@ -130,6 +127,16 @@ class PedidosController extends AbstractController
         $pedido->setEnviado(1);
         $entityManager->flush();
         return $this->redirectToRoute('app_pedidos_index');
+    }
+
+    #[Route('/mostrarMisPedidos/{user_id}', name: 'app_misPedidos', methods: ['GET'])]
+    public function misPedidos($user_id, EntityManagerInterface $entityManager): Response
+    {
+        $pedidos = $entityManager->getRepository(Pedidos::class)->findBy(['restaurante' => $user_id]);
+
+        return $this->render('pedidos/misPedidos.html.twig', [
+            'pedidos' => $pedidos,
+        ]);
     }
 
 }
