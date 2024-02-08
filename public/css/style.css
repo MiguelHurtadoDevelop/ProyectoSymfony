@@ -8,8 +8,8 @@
     outline: none;
     letter-spacing: 1px; }
 
-header{
-    background-color: black!important;
+body{
+    margin-top: 4rem!important;
 }
 
 a {

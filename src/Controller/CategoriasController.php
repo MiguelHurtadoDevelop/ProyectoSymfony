@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Categorias;
 use App\Form\CategoriasType;
 use App\Repository\CategoriasRepository;
+use App\Repository\ProductosRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,12 +44,16 @@ class CategoriasController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_categorias_show', methods: ['GET'])]
-    public function show(Categorias $categoria): Response
+    public function show(Categorias $categoria, ProductosRepository $productoRepository): Response
     {
+        $productos = $productoRepository->findBy(['categoria' => $categoria]);
+
         return $this->render('categorias/show.html.twig', [
             'categoria' => $categoria,
+            'productos' => $productos,
         ]);
     }
+
 
     #[Route('/{id}/edit', name: 'app_categorias_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Categorias $categoria, EntityManagerInterface $entityManager): Response
