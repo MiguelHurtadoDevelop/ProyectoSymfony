@@ -11,15 +11,91 @@
         {% if productos is not empty %}
             <div class="productos">
                 {% for producto in productos %}
-                    <a href="/productos/{{ producto.id }}">
-                        <p>{{ producto.nombre }}</p>
-                        <p>{{ producto.precio }}</p>
+                    <a class="producto" href="/productos/{{ producto.id }}">
+                        <div>
+                            <p>{{ producto.nombre }}</p>
+                            <p class="precio">{{ producto.precio }}€</p>
+                        </div>
                         <img src="/img/{{ producto.imagen }}">
                     </a>
                 {% endfor %}
             </div>
         {% else %}
-            <p>No hay productos disponibles en esta categoría.</p>
+            <p class="sin-productos">No hay productos disponibles en esta categoría.</p>
         {% endif %}
     </main>
+
+    <style>
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h6 {
+            text-align: center;
+            color: #666;
+        }
+
+        /* Estilos para el contenedor de productos */
+        .productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* Estilos para cada producto */
+        .producto {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .producto:hover{
+            box-shadow: 1px 1px 10px gray;
+            transform: scale(1.005);
+        }
+
+        .producto div{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .productos a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .producto p {
+            margin-bottom: 10px;
+            font-size: 150%;
+        }
+
+        .producto img {
+            max-width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .precio{
+            color: #ff0026;
+        }
+
+        /* Estilos para el caso de que no haya productos */
+        .sin-productos {
+            text-align: center;
+            color: #999;
+            margin-top: 20px;
+        }
+    </style>
 {% endblock %}
