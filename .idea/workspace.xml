@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aae3dfab-4332-4474-b274-fc2d52a98fdb" name="Changes" comment="" />
+    <list default="true" id="aae3dfab-4332-4474-b274-fc2d52a98fdb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/migrations/Version20240208181313.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20240208190600.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pedidos/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pedidos/index.html.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -208,6 +212,7 @@
       <workItem from="1707249111005" duration="1193000" />
       <workItem from="1707250936643" duration="1364000" />
       <workItem from="1707331571943" duration="2194000" />
+      <workItem from="1707420088380" duration="314000" />
     </task>
     <servers />
   </component>

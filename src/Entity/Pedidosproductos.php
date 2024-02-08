@@ -13,13 +13,12 @@ class Pedidosproductos
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'pedidosproductos')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Pedidos $pedido = null;
+    #[ORM\Column]
+    private ?int $pedido = null;
 
-    #[ORM\ManyToOne(inversedBy: 'pedidosproductos')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Productos $producto = null;
+    
+    #[ORM\Column]
+    private ?int $producto = null;
 
     #[ORM\Column]
     private ?int $unidades = null;
@@ -29,24 +28,24 @@ class Pedidosproductos
         return $this->id;
     }
 
-    public function getPedido(): ?Pedidos
+    public function getPedido(): ?int
     {
         return $this->pedido;
     }
 
-    public function setPedido(?Pedidos $pedido): static
+    public function setPedido(?int $pedido): static
     {
         $this->pedido = $pedido;
 
         return $this;
     }
 
-    public function getProducto(): ?productos
+    public function getProducto(): ?int
     {
         return $this->producto;
     }
 
-    public function setProducto(?productos $producto): static
+    public function setProducto(?int $producto): static
     {
         $this->producto = $producto;
 

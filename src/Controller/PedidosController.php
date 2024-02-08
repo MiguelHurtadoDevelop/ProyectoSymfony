@@ -95,9 +95,24 @@ class PedidosController extends AbstractController
         $pedido->setRestaurante($this->getUser());
 
         $pedido->setFecha(new \DateTime());
+
         $entityManager->persist($pedido);
         $entityManager->flush();
 
+
+        $idPedido = $pedido->getId();
+        
+
+        
+        return $this->redirectToRoute('crear_lineas_pedido', ['id_pedido' => $idPedido]);
+    }
+
+    #[Route('/enviar-pedido/{id}', name: 'app_pedidos_enviar_pedido')]
+    public function enviarPedido($id,EntityManagerInterface $entityManager): Response
+    {
+        $pedido = $entityManager->getRepository(Pedidos::class)->find($id);
+        $pedido->setEnviado(1);
+        $entityManager->flush();
         return $this->redirectToRoute('app_pedidos_index');
     }
 

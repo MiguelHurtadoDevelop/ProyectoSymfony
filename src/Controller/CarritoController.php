@@ -55,6 +55,9 @@ class CarritoController extends AbstractController
                                 'carrito' => $cart,
                             ]);
                         } else {
+                            $cart[$key]['cantidad'] = $producto->getStock();
+                            $cart[$key]['totalPorProducto'] = $cart[$key]['cantidad'] * $cart[$key]['precio'];
+                            $session->set('cart', $cart);
                             return $this->render('carrito/carrito.html.twig', [
                                 'carrito' => $cart,
                                 'error' => 'No hay suficiente stock',
@@ -126,6 +129,9 @@ class CarritoController extends AbstractController
 
                     return $this->redirectToRoute('app_carrito');
                 } else {
+                    $cart[$key]['cantidad'] = $producto->getStock();
+                    $cart[$key]['totalPorProducto'] = $cart[$key]['cantidad'] * $cart[$key]['precio'];
+                    $session->set('cart', $cart);
                     return $this->render('carrito/carrito.html.twig', [
                         'carrito' => $cart,
                         'error' => 'No hay suficiente stock',
@@ -143,12 +149,25 @@ class CarritoController extends AbstractController
 
 
     #[Route('/carrito/restarCantidad/{id}', name: 'app_carrito_restarCantidad')]
-    public function restarCantidad($id, SessionInterface $session){
+    public function restarCantidad($id, SessionInterface $session, EntityManagerInterface $entityManager){
         $cart = $session->get('cart', []);
         foreach($cart as $key => $productoCarrito){
             if($productoCarrito['id'] == $id){
-                $cart[$key]['cantidad']--;
-                $cart[$key]['totalPorProducto'] = $cart[$key]['cantidad'] * $cart[$key]['precio'];
+
+                $productosRepository = $entityManager->getRepository(Productos::class);
+                $producto = $productosRepository->findOneById($id);
+
+                if ($producto->getStock() >= ($productoCarrito['cantidad'])) {
+                    $cart[$key]['cantidad']--;
+                    $cart[$key]['totalPorProducto'] = $cart[$key]['cantidad'] * $cart[$key]['precio'];
+                    $session->set('cart', $cart);
+
+                    return $this->redirectToRoute('app_carrito');
+                } else {
+                    $cart[$key]['cantidad'] = $producto->getStock();
+                    $cart[$key]['totalPorProducto'] = $cart[$key]['cantidad'] * $cart[$key]['precio'];
+                    $session->set('cart', $cart);
+                }
                 if($cart[$key]['cantidad'] == 0){
                     $cart = array_filter($cart, function ($producto) use ($id) {
                         return $producto['id'] != $id;
