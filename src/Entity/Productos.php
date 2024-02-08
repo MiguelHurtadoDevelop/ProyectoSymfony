@@ -27,8 +27,8 @@ class Productos
     #[ORM\Column]
     private ?int $stock = null;
 
-    #[ORM\Column]
-    private ?int $precio = null;
+    #[ORM\Column(type: 'float', scale: 2)]
+    private ?float $precio = null;
 
     #[ORM\ManyToOne(inversedBy: 'productos')]
     #[ORM\JoinColumn(nullable: false)]

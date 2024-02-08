@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class ProductosType extends AbstractType
 {
@@ -19,7 +20,9 @@ class ProductosType extends AbstractType
             ->add('descripcion')
             ->add('peso')
             ->add('stock')
-            ->add('precio')
+            ->add('precio', NumberType::class, [
+                'scale' => 2,
+            ])
             ->add('categoria', EntityType::class, [
                 'class' => categorias::class,
                 'choice_label' => 'nombre',
