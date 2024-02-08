@@ -47,7 +47,9 @@
                                     <li class="items item1 mx-2">
                                         <a class="link" href="{{ path('app_categorias_show', {'id': categoria.id}) }}">{{ categoria.nombre }}</a>
                                     </li>
+                                    
                                 {% endfor %}
+                                <li class="items item1 mx-2"><a class="link" href="{{ path('app_pedidos_show', {'user_id': app.user.id }) }}">Mis Pedidos</a></li>
                             {% endif %}
                             <li class="items item1 mx-2">
                                 <a class="link" href="/logout">Cerrar Sesión</a>

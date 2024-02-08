@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Entity\Productos;
 
 
 
@@ -47,11 +48,13 @@ class PedidosController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_pedidos_show', methods: ['GET'])]
-    public function show(Pedidos $pedido): Response
+    #[Route('/{user_id}', name: 'app_pedidos_show', methods: ['GET'])]
+    public function show($user_id, EntityManagerInterface $entityManager): Response
     {
+        $pedidos = $entityManager->getRepository(Pedidos::class)->findBy(['restaurante' => $user_id]);
+        
         return $this->render('pedidos/show.html.twig', [
-            'pedido' => $pedido,
+            'pedidos' => $pedidos,
         ]);
     }
 
@@ -85,25 +88,38 @@ class PedidosController extends AbstractController
     }
 
     #[Route('/realizar-pedido/{total}', name: 'app_pedidos_realizar_pedido')]
-    public function realizarPedido($total,EntityManagerInterface $entityManager,SessionInterface $Session ): Response
+    public function realizarPedido($total, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
-        $pedido = new Pedidos();
+        // Obtener el carrito de la sesión
+        $cart = $session->get('cart', []);
 
-        $cart = $Session->get('cart', []);
+        // Verificar el stock de cada producto en el carrito
+        foreach ($cart as $producto) {
+            $productoEntity = $entityManager->getRepository(Productos::class)->find($producto['id']);
+
+            // Verificar si la cantidad pedida supera el stock disponible
+            if ($productoEntity && $producto['cantidad'] > $productoEntity->getStock()) {
+                return $this->render('carrito/carrito.html.twig', [
+                    'carrito' => $cart,
+                    'error' => 'No hay suficiente stock',
+                ]);
+            }
+        }
+
+        // Si todas las verificaciones de stock son exitosas, procede a realizar el pedido
+
+        $pedido = new Pedidos();
         $pedido->setPrecio($total);
         $pedido->setEnviado(0);
         $pedido->setRestaurante($this->getUser());
-
         $pedido->setFecha(new \DateTime());
 
         $entityManager->persist($pedido);
         $entityManager->flush();
 
-
         $idPedido = $pedido->getId();
-        
 
-        
+        // Redirige a la acción para crear las líneas de pedido
         return $this->redirectToRoute('crear_lineas_pedido', ['id_pedido' => $idPedido]);
     }
 
