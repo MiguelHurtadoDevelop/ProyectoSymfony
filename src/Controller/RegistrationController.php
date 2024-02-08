@@ -34,14 +34,8 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
         $errors = [];
 
-        if ($form->isSubmitted() && !$form->isValid()) {
 
-            $errors = $form->getErrors();
-        }
-
-
-
-            if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -63,7 +57,7 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
-            return $this->render('base.html.twig');
+            return $this->redirectToRoute('categorias');
         }
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
