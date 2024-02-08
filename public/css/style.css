@@ -12,6 +12,10 @@
     text-decoration: underline!important;
 }
 
+.img-thumbnail{
+    object-fit: cover;
+}
+
 body{
     margin-top: 4rem!important;
 }
