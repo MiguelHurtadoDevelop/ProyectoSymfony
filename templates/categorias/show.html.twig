@@ -11,6 +11,7 @@
         {% if productos is not empty %}        <ul>
                 {% for producto in productos %}
                     <li>{{ producto.nombre }}</li>
+                    <li><img src="/img/{{ producto.imagen }}"></li>
                 {% endfor %}
             </ul>
         {% else %}

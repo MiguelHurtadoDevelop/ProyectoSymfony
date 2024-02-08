@@ -77,6 +77,24 @@ class ProductosController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $file */
+            $file = $form->get('imagen')->getData();
+
+            if ($file) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+                try {
+                    $file->move(
+                        $this->getParameter('images_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                $producto->setImagen($fileName);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_productos_index', [], Response::HTTP_SEE_OTHER);
