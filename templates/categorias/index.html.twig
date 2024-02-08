@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categorias index{% endblock %}
+{% block title %}Categorias{% endblock %}
 
 {% block body %}
     <main>
-        <h1>Categorias index</h1>
+        <h1>Categorias</h1>
 
         <table class="table">
             <thead>
@@ -12,7 +12,7 @@
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Descripcion</th>
-                    <th>actions</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,19 +22,19 @@
                     <td>{{ categoria.nombre }}</td>
                     <td>{{ categoria.descripcion }}</td>
                     <td>
-                        <a href="{{ path('app_categorias_show', {'id': categoria.id}) }}">show</a>
-                        <a href="{{ path('app_categorias_edit', {'id': categoria.id}) }}">edit</a>
+                        <a href="{{ path('app_categorias_show', {'id': categoria.id}) }}">Mostrar</a>
+                        <a href="{{ path('app_categorias_edit', {'id': categoria.id}) }}">Editar</a>
                         {{ include('categorias/_delete_form.html.twig') }}
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="4">no records found</td>
+                    <td colspan="4">No se han encontrado categorías</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
 
-        <a href="{{ path('app_categorias_new') }}">Create new</a>
+        <a href="{{ path('app_categorias_new') }}">Crear Nueva</a>
     </main>
 {% endblock %}

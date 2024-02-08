@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Pedidos{% endblock %}
+{% block title %}Editar Pedidos{% endblock %}
 
 {% block body %}
     <main class="formulario">
-        <h1>Edit Pedidos</h1>
+        <h1>Editar Pedidos</h1>
 
         {{ include('pedidos/_form.html.twig', {'button_label': 'Update'}) }}
         <p></p>
         {{ include('pedidos/_delete_form.html.twig') }}
 
-        <a href="{{ path('app_pedidos_index') }}">back to list</a>
+        <a href="{{ path('app_pedidos_index') }}">Volver</a>
 
     </main>
 
