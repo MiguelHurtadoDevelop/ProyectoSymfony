@@ -3,17 +3,18 @@
 {% block title %}Categorias{% endblock %}
 
 {% block body %}
-    <h1>{{ categoria.nombre }}</h1>
+    <main>
+        <h1>{{ categoria.nombre }}</h1>
 
-    <h6>{{ categoria.descripcion }}</h6>
+        <h6>{{ categoria.descripcion }}</h6>
 
-    {% if productos is not empty %}        <ul>
-            {% for producto in productos %}
-                <li>{{ producto.nombre }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay productos disponibles en esta categoría.</p>
-    {% endif %}
-
+        {% if productos is not empty %}        <ul>
+                {% for producto in productos %}
+                    <li>{{ producto.nombre }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay productos disponibles en esta categoría.</p>
+        {% endif %}
+    </main>
 {% endblock %}
