@@ -4,41 +4,83 @@
 
 {% block body %}
     <main>
-        <h1>Productos</h1>
 
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ producto.id }}</td>
-                </tr>
-                <tr>
-                    <th>Nombre</th>
-                    <td>{{ producto.nombre }}</td>
-                </tr>
-                <tr>
-                    <th>Descripcion</th>
-                    <td>{{ producto.descripcion }}</td>
-                </tr>
-                <tr>
-                    <th>Peso</th>
-                    <td>{{ producto.peso }}</td>
-                </tr>
-                <tr>
-                    <th>Stock</th>
-                    <td>{{ producto.stock }}</td>
-                </tr>
-                <tr>
-                    <th>Precio</th>
-                    <td>{{ producto.precio }}</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <a href="{{ path('app_productos_index') }}">back to list</a>
-
-        <a href="{{ path('app_productos_edit', {'id': producto.id}) }}">edit</a>
-
-        {{ include('productos/_delete_form.html.twig') }}
+        <div class="producto">
+            <div>
+                <h2>{{ producto.nombre }}</h2>
+                <p class="stock">Quedan {{ producto.stock }} unidades</p>
+                <p class="peso">{{ producto.peso }}KG</p>
+                <p class="precio">{{ producto.precio }}€</p>
+                <a href=""><img src="../img/carrito.png" alt="addToCart"></a>
+            </div>
+            <p class="descripcion">{{ producto.descripcion }}</p>
+            <img src="/img/{{ producto.imagen }}">
+        </div>
     </main>
+
+    <style>
+        main{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Estilos para el contenedor del producto */
+        .producto {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 60vw;
+        }
+
+        .producto div{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .producto div img{
+            width: 30px;
+        }
+
+        .producto div p{
+            margin-top: 20px;
+        }
+
+        .precio {
+            font-size: 25px;
+            color: #ff0026; /* Azul */
+        }
+
+        .peso {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .stock {
+            font-size: 16px;
+            color: #28a745; /* Verde */
+        }
+
+        .descripcion {
+            font-size: 16px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .producto>img {
+            width: 57vw;
+            height: auto;
+            display: block;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+    </style>
 {% endblock %}
+
+

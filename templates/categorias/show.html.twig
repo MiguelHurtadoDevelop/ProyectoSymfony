@@ -8,12 +8,16 @@
 
         <h6>{{ categoria.descripcion }}</h6>
 
-        {% if productos is not empty %}        <ul>
+        {% if productos is not empty %}
+            <div class="productos">
                 {% for producto in productos %}
-                    <li>{{ producto.nombre }}</li>
-                    <li><img src="/img/{{ producto.imagen }}"></li>
+                    <a href="/productos/{{ producto.id }}">
+                        <p>{{ producto.nombre }}</p>
+                        <p>{{ producto.precio }}</p>
+                        <img src="/img/{{ producto.imagen }}">
+                    </a>
                 {% endfor %}
-            </ul>
+            </div>
         {% else %}
             <p>No hay productos disponibles en esta categoría.</p>
         {% endif %}
