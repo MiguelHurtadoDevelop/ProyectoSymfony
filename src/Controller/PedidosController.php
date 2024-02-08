@@ -149,7 +149,7 @@ class PedidosController extends AbstractController
         $idPedido = $pedido->getId();
 
         // Redirige a la acción para crear las líneas de pedido
-        return $this->redirectToRoute('crear_lineas_pedido', ['id_pedido' => $idPedido]);
+        return $this->redirectToRoute('crear_lineas_pedido', ['id_pedido' => $idPedido , 'precio' => $total]);
     }
 
     #[Route('/enviar-pedido/{id}', name: 'app_pedidos_enviar_pedido')]
@@ -158,6 +158,8 @@ class PedidosController extends AbstractController
         $pedido = $entityManager->getRepository(Pedidos::class)->find($id);
         $pedido->setEnviado(1);
         $entityManager->flush();
+
+
         return $this->redirectToRoute('app_pedidos_index');
     }
 

@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Productos;
+use App\Controller\MailerController;  
+use Symfony\Component\Mailer\MailerInterface;  
 
 
 #[Route('/pedidosproductos')]
@@ -82,8 +84,9 @@ class PedidosproductosController extends AbstractController
     }
 
     #[Route('/crearLineasPedido/{id_pedido}', name: 'crear_lineas_pedido')]
-    public function crearLineasPedido($id_pedido, Request $request, EntityManagerInterface $entityManager): Response
+    public function crearLineasPedido($id_pedido , Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
+        
         $session = $request->getSession();
         $cart = $session->get('cart', []);
         
@@ -102,6 +105,12 @@ class PedidosproductosController extends AbstractController
             $pedidosproducto->setUnidades($productoCarrito['cantidad']);
             $entityManager->persist($pedidosproducto);
         }
+
+        //enviar email
+        $mailerController = new MailerController();
+        $email = $this->getUser()->getEmail();
+        $response = $mailerController->sendEmail($mailer, $email, $cart, $id_pedido);
+
 
         $entityManager->flush();
         $session->set('cart', []);
