@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Entity\Productos;
+use App\Entity\Pedidosproductos;
 
 
 #[Route('/pedidos')]
@@ -48,12 +49,32 @@ class PedidosController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_pedidos_show', methods: ['GET'])]
-    public function show(Pedidos $pedido): Response
-    {
+    public function show(Pedidos $pedido, EntityManagerInterface $entityManager): Response
+    {   
+        $Pedidosproductos = $entityManager->getRepository(Pedidosproductos::class)->findBy(['pedido' => $pedido]);
+        
+        $productos = [];
+        
+        foreach ($Pedidosproductos as $producto) {
+            $productoEntity = $entityManager->getRepository(Productos::class)->find($producto->getProducto());
+
+            if ($productoEntity) {
+                $productos[] = [
+                    'id' => $productoEntity->getId(),
+                    'nombre' => $productoEntity->getNombre(),
+                    'precio' => $productoEntity->getPrecio(),
+                    'cantidad' => $producto->getUnidades(),
+                    'totalPorProducto' => $producto->getUnidades() * $productoEntity->getPrecio(),
+                ];
+            }
+        }
+
         return $this->render('pedidos/show.html.twig', [
             'pedido' => $pedido,
+            'productos' => $productos,
         ]);
     }
+
 
     #[Route('/{id}/edit', name: 'app_pedidos_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Pedidos $pedido, EntityManagerInterface $entityManager): Response
