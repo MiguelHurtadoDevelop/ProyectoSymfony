@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pedidos{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>Pedidos</h1>
+
+        {% for pedido in pedidos %}
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id Pedido</th>
+                        <td>{{ pedido.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Fecha</th>
+                        <td>{{ pedido.fecha ? pedido.fecha|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Estado</th>
+                        <td>{{ pedido.enviado ? 'Enviado' : 'Pendiente' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Precio</th>
+                        <td>{{ pedido.precio }}€</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            
+        {% endfor %}
+    </main>
+{% endblock %}
+
