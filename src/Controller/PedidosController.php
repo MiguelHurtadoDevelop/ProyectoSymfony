@@ -95,10 +95,16 @@ class PedidosController extends AbstractController
         $pedido->setRestaurante($this->getUser());
 
         $pedido->setFecha(new \DateTime());
+
         $entityManager->persist($pedido);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_pedidos_index');
+
+        $idPedido = $pedido->getId();
+        
+
+        
+        return $this->redirectToRoute('crear_lineas_pedido', ['id_pedido' => $idPedido]);
     }
 
 }
