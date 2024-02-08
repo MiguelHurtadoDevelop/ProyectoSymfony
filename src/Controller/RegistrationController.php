@@ -58,7 +58,7 @@ class RegistrationController extends AbstractController
             );
 
             // Redirección después de un envío exitoso
-            return $this->redirectToRoute('categorias');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
