@@ -4,7 +4,7 @@
 
 {% block body %}
     <main>
-        <h1>Pedidos</h1>
+        <h1>Pedido</h1>
 
         <table class="table">
             <tbody>
@@ -27,7 +27,8 @@
             </tbody>
         </table>
 
-        <h2>Productos en el Pedido</h2>
+        <br>
+        <h2>Productos del Pedido</h2>
 
         <table class="table">
             <thead>
@@ -43,16 +44,15 @@
                     <tr>
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.cantidad }}</td>
-                        <td>{{ producto.precio }}</td>
-                        <td>{{ producto.totalPorProducto }}</td>
+                        <td>{{ producto.precio }}€</td>
+                        <td>{{ producto.totalPorProducto }}€</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
 
+        <br>
         <a href="{{ path('app_pedidos_index') }}">Volver</a>
-        <a href="{{ path('app_pedidos_edit', {'id': pedido.id}) }}">Editar</a>
-        {{ include('pedidos/_delete_form.html.twig') }}
     </main>
 {% endblock %}
 
