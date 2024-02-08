@@ -63,4 +63,6 @@ class Pedidosproductos
 
         return $this;
     }
+
+    
 }

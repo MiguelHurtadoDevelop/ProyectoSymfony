@@ -97,13 +97,24 @@ class PedidosController extends AbstractController
     #[Route('/{id}', name: 'app_pedidos_delete', methods: ['POST'])]
     public function delete(Request $request, Pedidos $pedido, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$pedido->getId(), $request->request->get('_token'))) {
+        
+        // Check if $pedido is set and the request method is POST
+        if ($pedido && $request->isMethod('POST') && $this->isCsrfTokenValid('delete'.$pedido->getId(), $request->request->get('_token'))) {
+            
+            $LineasDePedido = $entityManager->getRepository(Pedidosproductos::class)->findByPedido($pedido->getId());
+            
+            foreach ($LineasDePedido as $linea) {
+                $entityManager->remove($linea);
+                $entityManager->flush();
+            }
+            
             $entityManager->remove($pedido);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_pedidos_index', [], Response::HTTP_SEE_OTHER);
     }
+
 
     #[Route('/realizar-pedido/{total}', name: 'app_pedidos_realizar_pedido')]
     public function realizarPedido($total, EntityManagerInterface $entityManager, SessionInterface $session): Response

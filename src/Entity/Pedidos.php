@@ -26,8 +26,7 @@ class Pedidos
     #[ORM\JoinColumn(nullable: false)]
     private ?Restaurante $restaurante = null;
 
-    #[ORM\OneToMany(targetEntity: Pedidosproductos::class, mappedBy: 'pedido', orphanRemoval: true)]
-    private Collection $pedidosproductos;
+    
 
     #[ORM\Column]
     private ?float $precio = null;

@@ -34,8 +34,7 @@ class Productos
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorias $categoria = null;
 
-    #[ORM\OneToMany(targetEntity: Pedidosproductos::class, mappedBy: 'producto', orphanRemoval: true)]
-    private Collection $pedidosproductos;
+
 
     #[ORM\Column(length: 90)]
     private ?string $imagen = null;

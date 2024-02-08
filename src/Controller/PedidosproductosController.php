@@ -106,6 +106,6 @@ class PedidosproductosController extends AbstractController
         $entityManager->flush();
         $session->set('cart', []);
 
-        return $this->redirectToRoute('app_carrito');
+        return $this->redirectToRoute('app_misPedidos', ['user_id' => $this->getUser()->getId()]);
     }
 }
