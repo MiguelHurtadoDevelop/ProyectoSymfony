@@ -26,6 +26,7 @@
                     <td>
                         <a href="{{ path('app_pedidos_show', {'id': pedido.id}) }}">Mostrar</a>
                         <a href="{{ path('app_pedidos_edit', {'id': pedido.id}) }}">Editar</a>
+                        <a href="{{ path('app_pedidos_enviar_pedido', {'id': pedido.id}) }}">Enviar</a>
                     </td>
                 </tr>
             {% else %}
