@@ -29,6 +29,7 @@
                         {% if not pedido.enviado %}
                             <a href="{{ path('app_pedidos_enviar_pedido', {'id': pedido.id}) }}">Enviar</a>
                         {% endif %}
+                        {{ include('pedidos/_delete_form.html.twig') }}
                     </td>
                 </tr>
             {% else %}
