@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aae3dfab-4332-4474-b274-fc2d52a98fdb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/migrations/Version20240208175900.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Pedidos.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pedidos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pedidos/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pedidos/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
