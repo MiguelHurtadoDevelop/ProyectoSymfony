@@ -3,11 +3,9 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    {% for flash_error in errors %}
-        <p class="alert alert-danger" role="alert">{{ flash_error }}</p>
-    {% endfor %}
-
     <h1>Register</h1>
+
+    {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
