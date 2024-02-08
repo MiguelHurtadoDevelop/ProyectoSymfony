@@ -372,8 +372,6 @@ body .footer .container .footer-content .copyright p {
     transform: scale(1.01); }
 
 @media (max-width: 992px) {
-    .middle-side {
-        display: none; }
 
     .search-form {
         width: 50%; } }
