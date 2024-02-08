@@ -50,6 +50,10 @@ class ProductosController extends AbstractController
                 $producto->setImagen($fileName);
             }
 
+            // Handle the price as float
+            $precio = $form->get('precio')->getData();
+            $producto->setPrecio((float) $precio);
+
             $entityManager->persist($producto);
             $entityManager->flush();
 

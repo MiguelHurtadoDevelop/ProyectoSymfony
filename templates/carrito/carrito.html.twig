@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carrito{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>Carrito</h1>
+
+        {% if carrito is not empty %}
+            <div class="carrito">
+                {% for producto in carrito %}
+                    <a href="/productos/{{ producto.id }}">
+                        <p>{{ producto.nombre }}</p>
+                        <p>{{ producto.precio }}</p>
+                        <img src="/img/{{ producto.imagen }}">
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No hay productos disponibles en esta categoría.</p>
+        {% endif %}
+    </main>
+{% endblock %}
+
