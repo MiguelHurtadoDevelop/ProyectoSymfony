@@ -10,6 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+
 
 #[Route('/pedidos')]
 class PedidosController extends AbstractController
@@ -77,6 +80,25 @@ class PedidosController extends AbstractController
             $entityManager->remove($pedido);
             $entityManager->flush();
         }
+
         return $this->redirectToRoute('app_pedidos_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/realizar-pedido/{total}', name: 'app_pedidos_realizar_pedido')]
+    public function realizarPedido($total,EntityManagerInterface $entityManager,SessionInterface $Session ): Response
+    {
+        $pedido = new Pedidos();
+
+        $cart = $Session->get('cart', []);
+        $pedido->setPrecio($total);
+        $pedido->setEnviado(0);
+        $pedido->setRestaurante($this->getUser());
+
+        $pedido->setFecha(new \DateTime());
+        $entityManager->persist($pedido);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_pedidos_index');
+    }
+
 }
