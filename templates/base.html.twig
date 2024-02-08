@@ -26,26 +26,25 @@
                 </div>
                 <div class="middle-side">
                     <ul>
-                        <li class="items item1 mx-2"><a class="link" href='/'>home</a></li>
-                        <li class="items item1 mx-2"><a class="link" href='#about'>about</a></li>
-                        <li class="items item1 mx-2"><a class="link" href='#services'>services</a></li>
-                        <li class="items item1 mx-2"><a class="link" href='/categorias'>categories</a></li>
-                        <li class="items item1 mx-2"><a class="link" href='#menu'>menu</a></li>
-                        <li class="items item1 mx-2"><a class="link" href='#blogs'>blogs</a></li>
-                        <li class="items item1 mx-2"><a class="link" href='#reviews'>reviews</a></li>
-                        <li class="items item1 mx-2"><a class="link" href='#contact'>contact</a></li>
-
                         {% if app.user %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="items item1 mx-2">
+                                    <a class="link" href="/categorias">Categorias</a>
+                                </li>
+                                <li class="items item1 mx-2">
+                                    <a class="link" href="/productos">Productos</a>
+                                </li>
+                                <li class="items item1 mx-2">
+                                    <a class="link" href="/pedidos">Pedidos</a>
+                                </li>
+                            {% endif %}
                             <li class="items item1 mx-2">
-                                <a class="link" href="/logout">Logout</a>
+                                <a class="link" href="/logout">Cerrar Sesión</a>
                             </li>
                         {% else %}
                             <!-- Usuario no autenticado -->
                             <li class="items item1 mx-2">
-                                <a class="link" href="/login">Login</a>
-                            </li>
-                            <li class="items item1 mx-2">
-                                <a class="link" href="/register">Register</a>
+                                <a class="link" href="/login">Iniciar Sesión</a>
                             </li>
                         {% endif %}
                     </ul>
