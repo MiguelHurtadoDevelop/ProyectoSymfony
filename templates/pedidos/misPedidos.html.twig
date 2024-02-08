@@ -6,30 +6,29 @@
     <main>
         <h1>Pedidos</h1>
 
-        {% for pedido in pedidos %}
             <table class="table">
                 <tbody>
+                    <thead>
+                        <tr>
+                            <th>Id Pedido</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    {% for pedido in pedidos %}
                     <tr>
-                        <th>Id Pedido</th>
                         <td>{{ pedido.id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Fecha</th>
                         <td>{{ pedido.fecha ? pedido.fecha|date('Y-m-d') : '' }}</td>
-                    </tr>
-                    <tr>
-                        <th>Estado</th>
                         <td>{{ pedido.enviado ? 'Enviado' : 'Pendiente' }}</td>
-                    </tr>
-                    <tr>
-                        <th>Precio</th>
                         <td>{{ pedido.precio }}€</td>
+                        <td><a href="/pedidos/{{ pedido.id }}">Detalles</a></td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
-
-            
-        {% endfor %}
     </main>
+
 {% endblock %}
 

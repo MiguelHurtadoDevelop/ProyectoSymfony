@@ -20,6 +20,10 @@ body{
     margin-top: 4rem!important;
 }
 
+.table{
+    text-align: center!important;
+}
+
 main{
     margin: 10rem;
 }
