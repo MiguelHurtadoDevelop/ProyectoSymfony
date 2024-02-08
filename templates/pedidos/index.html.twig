@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pedidos index{% endblock %}
+{% block title %}Pedidos{% endblock %}
 
 {% block body %}
     <main>
-        <h1>Pedidos index</h1>
+        <h1>Pedidos</h1>
 
         <table class="table">
             <thead>
@@ -13,7 +13,7 @@
                     <th>Fecha</th>
                     <th>Enviado</th>
                     <th>Precio</th>
-                    <th>actions</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,18 +24,18 @@
                     <td>{{ pedido.enviado }}</td>
                     <td>{{ pedido.precio }}</td>
                     <td>
-                        <a href="{{ path('app_pedidos_show', {'id': pedido.id}) }}">show</a>
-                        <a href="{{ path('app_pedidos_edit', {'id': pedido.id}) }}">edit</a>
+                        <a href="{{ path('app_pedidos_show', {'id': pedido.id}) }}">Mostrar</a>
+                        <a href="{{ path('app_pedidos_edit', {'id': pedido.id}) }}">Editar</a>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="5">no records found</td>
+                    <td colspan="5">No se han encontrado pedidos.</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
 
-        <a href="{{ path('app_pedidos_new') }}">Create new</a>
+        <a href="{{ path('app_pedidos_new') }}">Crear Pedido</a>
     </main>
 {% endblock %}

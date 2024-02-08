@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Productos index{% endblock %}
+{% block title %}Productos{% endblock %}
 
 {% block body %}
     <main>
-        <h1>Productos index</h1>
+        <h1>Productos</h1>
 
         <table class="table">
             <thead>
@@ -15,7 +15,7 @@
                     <th>Peso</th>
                     <th>Stock</th>
                     <th>Precio</th>
-                    <th>actions</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,19 +28,19 @@
                     <td>{{ producto.stock }}</td>
                     <td>{{ producto.precio }}</td>
                     <td>
-                        <a href="{{ path('app_productos_show', {'id': producto.id}) }}">show</a>
-                        <a href="{{ path('app_productos_edit', {'id': producto.id}) }}">edit</a>
+                        <a href="{{ path('app_productos_show', {'id': producto.id}) }}">Mostrar</a>
+                        <a href="{{ path('app_productos_edit', {'id': producto.id}) }}">Editar</a>
                         {{ include('productos/_delete_form.html.twig') }}
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="7">no records found</td>
+                    <td colspan="7">No hay productos disponibles</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
 
-        <a href="{{ path('app_productos_new') }}">Create new</a>
+        <a href="{{ path('app_productos_new') }}">Crear Producto</a>
     </main>
 {% endblock %}
