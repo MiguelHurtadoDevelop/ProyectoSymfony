@@ -3,11 +3,72 @@
 {% block title %}New Productos{% endblock %}
 
 {% block body %}
-    <main>
-        <h1>Create new Productos</h1>
+    <main class="formulario">
+        <h2>Create new Productos</h2>
 
         {{ include('productos/_form.html.twig') }}
 
-        <a href="{{ path('app_productos_index') }}">back to list</a>
+        <a href="{{ path('app_productos_index') }}">Volver</a>
     </main>
+    <style>
+
+        body{
+            padding-top: 50px;
+        }
+
+        /* Estilos generales para el formulario */
+        .formulario {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        /* Estilos para el título del formulario */
+        .formulario h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Estilos para los campos del formulario */
+        .formulario input,
+        select,
+        .formulario textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* Estilos para las etiquetas de los campos */
+        .formulario label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Estilos para el botón del formulario */
+        .formulario button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff; /* Azul */
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Estilos para el botón del formulario al pasar el ratón por encima */
+        .formulario button:hover {
+            background-color: #0056b3; /* Azul más oscuro */
+            color: #fff;
+        }
+
+    </style>
 {% endblock %}

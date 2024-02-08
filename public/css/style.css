@@ -30,6 +30,10 @@ html {
     font-size: 25px;
     font-weight: 800; }
 
+.carrito img{
+    width: 30px;
+}
+
 .sub-title {
     display: inline-block;
     padding: 5px 30px;

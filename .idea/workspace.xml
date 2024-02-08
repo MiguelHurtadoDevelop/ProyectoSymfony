@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="aae3dfab-4332-4474-b274-fc2d52a98fdb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categorias/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categorias/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/categorias/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categorias/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/categorias/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categorias/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/productos/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/productos/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/productos/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/productos/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/productos/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/productos/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

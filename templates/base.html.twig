@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -48,6 +48,9 @@
                             {% endif %}
                             <li class="items item1 mx-2">
                                 <a class="link" href="/logout">Cerrar Sesión</a>
+                            </li>
+                            <li class="items item1 mx-2">
+                                <a class="carrito" href="/carrito"><img src="./img/carrito.png" onerror="this.src='../img/carrito.png';" alt="carrito"></a>
                             </li>
                         {% else %}
                             <!-- Usuario no autenticado -->
