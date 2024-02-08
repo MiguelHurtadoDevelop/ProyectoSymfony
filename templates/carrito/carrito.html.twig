@@ -11,23 +11,26 @@
         {% if carrito is not empty %}
             <div class="carrito">
                 {% for producto in carrito %}
-                    <p class="nombre">Nombre: {{ producto.nombre }}</p>
-                    <p class="precio">Precio: {{ producto.precio }}</p>
-                    <div>
-                        <a href="/productos/{{ producto.id }}"><img src="/img/{{ producto.imagen }}" class="imagen"></a>
-                    </div>
-                    <div>
-                        <a class="anadirOQuitar" href="/carrito/restarCantidad/{{producto.id}}">-</a>
-                        <p class="cantidad">Cantidad: {{producto.cantidad}}</p>
-                        <a class="anadirOQuitar" href="/carrito/sumarCantidad/{{producto.id}}">+</a>
-                    </div>
-                    <p class="precioTotal">Precio Total Carrito: {{producto.totalPorProducto}}</p>
-                    <a class="borrar" href="/carrito/borrar/{{producto.id}}">Borrar</a>
+                    <div class="producto">
+                        <p class="imagenContainer">
+                            <a href="/productos/{{ producto.id }}"><img src="/img/{{ producto.imagen }}" class="imagen"></a>
+                        </p>
+                        <p class="nombre">{{ producto.nombre }}</p>
+                        <p class="precio">{{ producto.precio }}€</p>
+                        <div class="cantidad">
+                            <a class="anadirOQuitar" href="/carrito/restarCantidad/{{producto.id}}">-</a>
+                            <p class="cantidad">{{producto.cantidad}}</p>
+                            <a class="anadirOQuitar" href="/carrito/sumarCantidad/{{producto.id}}">+</a>
+                        </div>
 
-                    {% set totalCarrito = totalCarrito + producto.totalPorProducto %}
+                        <p class="precioTotal">{{producto.totalPorProducto}}€</p>
+                        <p><a class="borrar" href="/carrito/borrar/{{producto.id}}">Borrar</a></p>
+
+                        {% set totalCarrito = totalCarrito + producto.totalPorProducto %}
+                    </div>
                 {% endfor %}
             </div>
-            <p class="totalCarrrito">Total = {{ totalCarrito }}</p>
+            <p class="totalCarrrito">{{ totalCarrito }}€</p>
             <a class="vaciarORealizar" href="/carrito/vaciar">Vaciar carrito</a>
             <a class="vaciarORealizar" href="/pedidos/realizar-pedido/{{ totalCarrito }}">Hacer Pedido</a>
             {% if error is defined %}
@@ -37,6 +40,98 @@
             <p class="sinProductos">No hay productos disponibles en el carrito.</p>
         {% endif %}
     </main>
+
+    <style>
+        main {
+            max-width: 60%;
+            margin: 0 auto;
+            padding: 10vh 20px 20px;
+        }
+
+        .titulo {
+            text-align: center;
+            color: #333;
+        }
+
+        .producto{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-top: 15px;
+            border-top: 1px solid gainsboro;
+            border-bottom: 1px solid gainsboro;
+        }
+
+        .cantidad{
+            display: flex;
+        }
+
+        .carrito {
+            margin-top: 20px;
+        }
+
+        .nombre, .precio, .cantidad, .precioTotal, .totalCarrrito, .sinProductos, .borrar, .anadirOQuitar, .vaciarORealizar {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .imagen {
+            width: 100px!important;
+            object-fit: cover;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+            border-radius: 8px;
+        }
+
+        .imagen:hover{
+            filter: brightness(0.5);
+        }
+
+        .anadirOQuitar, .borrar, .vaciarORealizar {
+            text-decoration: none;
+            color: #007bff;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+
+        .borrar:hover{
+            text-decoration: underline;
+        }
+
+        .anadirOQuitar:hover, .borrar:hover, .vaciarORealizar:hover {
+            color: #0056b3;
+        }
+
+        .totalCarrrito {
+            font-size: 30px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10vh;
+            color: #ff0026;
+        }
+
+        .sinProductos {
+            text-align: center;
+            font-style: italic;
+        }
+
+        .vaciarORealizar {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .vaciarORealizar:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
 {% endblock %}
 
 
