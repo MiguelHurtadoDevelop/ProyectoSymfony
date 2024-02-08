@@ -34,7 +34,14 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
         $errors = [];
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && !$form->isValid()) {
+
+            $errors = $form->getErrors();
+        }
+
+
+
+            if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -45,7 +52,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $errors = $validator->validate($user);
+            
 
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
@@ -56,9 +63,8 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
-            return $this->redirectToRoute('/');
+            return $this->render('base.html.twig');
         }
-
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
             'errors' => $errors,
