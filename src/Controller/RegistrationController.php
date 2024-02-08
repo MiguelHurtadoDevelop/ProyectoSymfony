@@ -27,13 +27,15 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(ValidatorInterface $validator,Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(ValidatorInterface $validator, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+        // Eliminar la desactivación de eventos de Doctrine
+        // $entityManager->getEventManager()->disableListeners();
+
         $user = new Restaurante();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         $errors = [];
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword(
@@ -46,9 +48,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            
-
-            // generate a signed url and email it to the user
+            // Generar una URL firmada y enviarla por correo electrónico al usuario
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('herrerojorge730@gmail.com', 'Il Ristorante'))
@@ -56,9 +56,11 @@ class RegistrationController extends AbstractController
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
-            // do anything else you need here, like send an email
+
+            // Redirección después de un envío exitoso
             return $this->redirectToRoute('categorias');
         }
+
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
             'errors' => $errors,
@@ -70,7 +72,7 @@ class RegistrationController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        // validate email confirmation link, sets User::isVerified=true and persists
+        // Validar el enlace de confirmación de correo electrónico, establecer User::isVerified=true y persistir
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
         } catch (VerifyEmailExceptionInterface $exception) {
@@ -79,9 +81,10 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
+        // @TODO Cambiar la redirección en caso de éxito y manejar o eliminar el mensaje flash en tus plantillas
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('app_register');
     }
 }
+
