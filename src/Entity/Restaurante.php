@@ -33,6 +33,10 @@ class Restaurante implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     #[ORM\Column]
+    #[Assert\Type(
+        type: 'integer',
+        message: 'El codigo postal son numeros'
+    )]
     private ?int $CP = null;
 
     #[ORM\Column(length: 255)]
