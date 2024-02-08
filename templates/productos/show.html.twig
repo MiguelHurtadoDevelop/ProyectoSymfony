@@ -11,7 +11,9 @@
                 <p class="stock">Quedan {{ producto.stock }} unidades</p>
                 <p class="peso">{{ producto.peso }}KG</p>
                 <p class="precio">{{ producto.precio }}€</p>
-                <a href="/carrito/add/{{ producto.id }}"><img src="../img/carrito.png" alt="addToCart"></a>
+                {% if producto.stock>0 %}
+                    <a href="/carrito/add/{{ producto.id }}"><img src="../img/carrito.png" alt="addToCart"></a>
+                {% endif %}
             </div>
             <p class="descripcion">{{ producto.descripcion }}</p>
             <img src="/img/{{ producto.imagen }}">
