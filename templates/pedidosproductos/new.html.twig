@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Pedidosproductos{% endblock %}
+
+{% block body %}
+    <h1>Create new Pedidosproductos</h1>
+
+    {{ include('pedidosproductos/_form.html.twig') }}
+
+    <a href="{{ path('app_pedidosproductos_index') }}">back to list</a>
+{% endblock %}
