@@ -4,35 +4,37 @@
 
 {% block body %}
     <main>
-        <h1>Carrito</h1>
+        <h1 class="titulo">Carrito</h1>
 
         {% set totalCarrito = 0 %}
 
         {% if carrito is not empty %}
             <div class="carrito">
                 {% for producto in carrito %}
-                    <p>{{ producto.nombre }}</p>
-                    <p>{{ producto.precio }}</p>
-                    <a href="/productos/{{ producto.id }}"><img src="/img/{{ producto.imagen }}"></a>
+                    <p class="nombre">Nombre: {{ producto.nombre }}</p>
+                    <p class="precio">Precio: {{ producto.precio }}</p>
                     <div>
-                        <a href="/carrito/restarCantidad/{{producto.id}}">-</a>
-                        <p>{{producto.cantidad}}</p>
-                        <a href="/carrito/sumarCantidad/{{producto.id}}">+</a>
+                        <a href="/productos/{{ producto.id }}"><img src="/img/{{ producto.imagen }}" class="imagen"></a>
                     </div>
-                    <p>{{producto.precio}}</p>
-                    <p>{{producto.totalPorProducto}}</p>
-                    <a href="/carrito/borrar/{{producto.id}}">Borrar</a>
+                    <div>
+                        <a class="anadirOQuitar" href="/carrito/restarCantidad/{{producto.id}}">-</a>
+                        <p class="cantidad">Cantidad: {{producto.cantidad}}</p>
+                        <a class="anadirOQuitar" href="/carrito/sumarCantidad/{{producto.id}}">+</a>
+                    </div>
+                    <p class="precioTotal">Precio Total Carrito: {{producto.totalPorProducto}}</p>
+                    <a class="borrar" href="/carrito/borrar/{{producto.id}}">Borrar</a>
 
                     {% set totalCarrito = totalCarrito + producto.totalPorProducto %}
                 {% endfor %}
             </div>
-            <p>Total = {{ totalCarrito }}</p>
-            <a href="/carrito/vaciar">Vaciar carrito</a>
+            <p class="totalCarrrito">Total = {{ totalCarrito }}</p>
+            <a class="vaciarORealizar" href="/carrito/vaciar">Vaciar carrito</a>
+            <a class="vaciarORealizar" href="/pedidos/realizarPedido">Hacer Pedido</a>
             {% if error is defined %}
                 <p>{{ error }}</p>
             {% endif %}
         {% else %}
-            <p>No hay productos disponibles en el carrito.</p>
+            <p class="sinProductos">No hay productos disponibles en el carrito.</p>
         {% endif %}
     </main>
 {% endblock %}

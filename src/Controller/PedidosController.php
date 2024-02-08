@@ -75,7 +75,6 @@ class PedidosController extends AbstractController
             $entityManager->remove($pedido);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('app_pedidos_index', [], Response::HTTP_SEE_OTHER);
     }
 }
