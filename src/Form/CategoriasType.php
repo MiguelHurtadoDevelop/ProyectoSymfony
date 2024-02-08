@@ -4,15 +4,28 @@ namespace App\Form;
 
 use App\Entity\Categorias;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType; 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank; 
+use Symfony\Component\Validator\Constraints\Regex; 
 
 class CategoriasType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nombre')
+        ->add('nombre', TextType::class, [
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Por favor, introduce un nombre.',
+                ]),
+                new Regex([
+                    'pattern' => '/^[a-zA-ZñÑ]+$/u',
+                    'message' => 'El nombre solo debe contener letras.',
+                ]),
+            ]
+        ])
             ->add('descripcion')
         ;
     }

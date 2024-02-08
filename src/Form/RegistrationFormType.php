@@ -28,13 +28,24 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Correo Electrónico',
             ])
             ->add('CP', NumberType::class, [
-                'label' => 'Código Postal',                
+                'label' => 'Código Postal',
+                            
             ])
             ->add('Pais', TextType::class, [
                 'label' => 'País',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Por favor, introduce un pais.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[a-zA-ZñÑ]+$/u',
+                        'message' => 'El país solo debe contener letras.',
+                    ]),
+                ]
             ])
             ->add('Direccion', TextType::class, [
                 'label' => 'Dirección',
+                
             ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
