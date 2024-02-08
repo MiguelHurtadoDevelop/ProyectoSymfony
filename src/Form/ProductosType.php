@@ -10,6 +10,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Validator\Constraints\Type;
+
 
 class ProductosType extends AbstractType
 {
@@ -21,7 +23,11 @@ class ProductosType extends AbstractType
             ->add('peso')
             ->add('stock')
             ->add('precio', NumberType::class, [
-                'scale' => 2,
+                'scale' => 2,'constraints' => [
+                new Type([
+                    'type' => 'numeric',
+                    'message' => 'El precio debe ser un número.',
+                ]),]
             ])
             ->add('categoria', EntityType::class, [
                 'class' => categorias::class,
