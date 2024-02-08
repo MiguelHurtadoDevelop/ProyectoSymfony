@@ -20,7 +20,7 @@ class Pedidos
     private ?\DateTimeInterface $fecha = null;
 
     #[ORM\Column]
-    private ?int $enviado = null;
+    private ?bool $enviado = null;
 
     #[ORM\ManyToOne(inversedBy: 'pedidos')]
     #[ORM\JoinColumn(nullable: false)]

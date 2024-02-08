@@ -15,7 +15,6 @@ class PedidosType extends AbstractType
     {
         $builder
             ->add('fecha')
-            ->add('enviado')
             ->add('precio')
             ->add('restaurante', EntityType::class, [
                 'class' => Restaurante::class,
