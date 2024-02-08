@@ -30,6 +30,8 @@ class PedidosController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $pedido->setEnviado(0);
             $entityManager->persist($pedido);
             $entityManager->flush();
 
