@@ -21,11 +21,12 @@
                 <tr>
                     <td>{{ pedido.id }}</td>
                     <td>{{ pedido.fecha ? pedido.fecha|date('Y-m-d') : '' }}</td>
-                    <td>{{ pedido.enviado }}</td>
+                    <td>{{ pedido.enviado ? "Enviado" : "Pendiente" }}</td>
                     <td>{{ pedido.precio }}</td>
                     <td>
                         <a href="{{ path('app_pedidos_show', {'id': pedido.id}) }}">Mostrar</a>
                         <a href="{{ path('app_pedidos_edit', {'id': pedido.id}) }}">Editar</a>
+                        
                         <a href="{{ path('app_pedidos_enviar_pedido', {'id': pedido.id}) }}">Enviar</a>
                     </td>
                 </tr>
