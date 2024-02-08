@@ -5,7 +5,7 @@ namespace App\Form;
 use App\Entity\Restaurante;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,42 +19,45 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
             ->add('nombre', TextType::class, [
                 'label' => 'Nombre',
             ])
-            ->add('cp', NumberType::class, [ 
-                'label' => 'CP', 
+            ->add('email', EmailType::class, [
+                'label' => 'Correo Electrónico',
             ])
-            ->add('pais', TextType::class, [ 
-                'label' => 'País', 
+            ->add('CP', TextType::class, [
+                'label' => 'Código Postal',
             ])
-            ->add('direccion', TextType::class, [ 
-                'label' => 'Dirección', 
+            ->add('Pais', TextType::class, [
+                'label' => 'País',
+            ])
+            ->add('Direccion', TextType::class, [
+                'label' => 'Dirección',
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Debes aceptar nuestros términos.',
                     ]),
                 ],
+                'label' => 'Acepto los términos y condiciones',
             ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Por favor, introduce una contraseña',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Tu contraseña debe tener al menos {{ limit }} caracteres',
                         'max' => 4096,
                     ]),
                 ],
-            ])
-        ;
+                'label' => 'Contraseña',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
