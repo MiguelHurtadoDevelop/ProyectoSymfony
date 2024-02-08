@@ -37,6 +37,9 @@ class Productos
     #[ORM\OneToMany(targetEntity: Pedidosproductos::class, mappedBy: 'producto', orphanRemoval: true)]
     private Collection $pedidosproductos;
 
+    #[ORM\Column(length: 90)]
+    private ?string $imagen = null;
+
     public function __construct()
     {
         $this->pedidosproductos = new ArrayCollection();
@@ -145,6 +148,18 @@ class Productos
                 $pedidosproducto->setProducto(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImagen(): ?string
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(string $imagen): static
+    {
+        $this->imagen = $imagen;
 
         return $this;
     }
