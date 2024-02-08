@@ -9,11 +9,12 @@
         {% if carrito is not empty %}
             <div class="carrito">
                 {% for producto in carrito %}
-                    <a href="/productos/{{ producto.id }}">
+                    
                         <p>{{ producto.nombre }}</p>
                         <p>{{ producto.precio }}</p>
-                        <img src="/img/{{ producto.imagen }}">
-                    </a>
+                        <a href="/productos/{{ producto.id }}"><img src="/img/{{ producto.imagen }}"></a>
+                        <p>{{producto.cantidad}}</p>
+                        <a href="/carrito/borrar/{{producto.id}}">Borrar</a>
                 {% endfor %}
             </div>
         {% else %}
