@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\Productos;
+
 
 #[Route('/pedidosproductos')]
 class PedidosproductosController extends AbstractController
@@ -77,5 +79,33 @@ class PedidosproductosController extends AbstractController
         }
 
         return $this->redirectToRoute('app_pedidosproductos_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/crearLineasPedido/{id_pedido}', name: 'crear_lineas_pedido')]
+    public function crearLineasPedido($id_pedido, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $session = $request->getSession();
+        $cart = $session->get('cart', []);
+        
+        foreach ($cart as $productoCarrito) {
+            $pedidosproducto = new Pedidosproductos();
+            
+            $pedidosproducto->setPedido($id_pedido);
+            $pedidosproducto->setProducto($productoCarrito['id']);
+
+            $productosRepository = $entityManager->getRepository(Productos::class);
+            $producto = $productosRepository->findOneById($productoCarrito['id']);
+
+            $producto->setStock($producto->getStock() - $productoCarrito['cantidad']);
+            $entityManager->persist($producto);
+
+            $pedidosproducto->setUnidades($productoCarrito['cantidad']);
+            $entityManager->persist($pedidosproducto);
+        }
+
+        $entityManager->flush();
+        $session->set('cart', []);
+
+        return $this->redirectToRoute('app_carrito');
     }
 }
