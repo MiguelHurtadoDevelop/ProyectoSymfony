@@ -7,6 +7,11 @@
     outline: none;
     letter-spacing: 1px; }
 
+.delete{
+    color: red!important;
+    text-decoration: underline!important;
+}
+
 body{
     margin-top: 4rem!important;
 }

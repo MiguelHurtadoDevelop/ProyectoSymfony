@@ -28,11 +28,7 @@
                 <div class="middle-side">
                     <ul>
                         {% if app.user %}
-                            {% for categoria in categorias() %}
-                                <li class="items item1 mx-2">
-                                    <a class="link" href="{{ path('app_categorias_show', {'id': categoria.id}) }}">{{ categoria.nombre }}</a>
-                                </li>
-                            {% endfor %}
+
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li class="items item1 mx-2">
                                     <a class="link" href="/categorias">Categorias</a>
@@ -46,6 +42,12 @@
                                 <li class="items item1 mx-2">
                                     <a class="link" href="/register">Registrar Restaurante</a>
                                 </li>
+                            {% else %}
+                                {% for categoria in categorias() %}
+                                    <li class="items item1 mx-2">
+                                        <a class="link" href="{{ path('app_categorias_show', {'id': categoria.id}) }}">{{ categoria.nombre }}</a>
+                                    </li>
+                                {% endfor %}
                             {% endif %}
                             <li class="items item1 mx-2">
                                 <a class="link" href="/logout">Cerrar Sesión</a>
