@@ -4,12 +4,166 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link href = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel = "stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <body class="position-relative">
+<header>
+    <button class="button-up rounded-circle py-1 px-2 position-fixed" id = 'btnup'>
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-        
-    </head>
-    <body>
-        {% block body %}{% endblock %}
+    <form class="search-form position-fixed shadow-lg" id = 'searchBar'>
+        <div class="form-content position-relative">
+            <input class="input-form py-1 px-3" name="input-search" placeholder="search ..." id = 'inputBar'>
+            <span class="form-icon position-absolute" id ='formIcon'><i class="fas fa-search"></i></span>
+        </div>
+    </form>
+
+    <div class="_navbar min-vh-100 position-fixed d-lg-none" id = '_navbar'>
+        <div class="close-btn py-2 px-3" id = 'close-btn'>
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="navbar-content">
+            <ul>
+                <li class="items item1 my-md-4 my-3"><a class="link" href='#home'>home</a></li>
+                <li class="items item1 my-md-4 my-3"><a class="link" href='#about'>about</a></li>
+                <li class="items item1 my-md-4 my-3"><a class="link" href='#services'>services</a></li>
+                <li class="items item1 my-md-4 my-3"><a class="link" href='#categories'>categories</a></li>
+                <li class="items item1 my-md-4 my-3"><a class="link" href='#menu'>menu</a></li>
+                <li class="items item1 my-md-4 my-3"><a class="link" href='#blogs'>blogs</a></li>
+                <li class="items item1 my-md-4 my-3"><a class="link" href='#reviews'>reviews</a></li>
+                <li class="items item1 my-md-4 my-3"><a class="link" href='#contact'>contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="header py-2 fixed-top" id = 'header'>
+        <div class="container">
+            <div class="header-content d-flex justify-content-between align-items-center">
+                <div class="left-side">
+                    <a href = '#home' class="d-flex align-items-center">
+                        <img class='brand-img me-2' src='img/icon.png' alt='brand picture'>
+                        <p class="brand-text" id = 'brand-title'>Il<span><i class="fas fa-wine-glass mx-2 text-warning"></i></span><span class="brand-sub-title">Ristorante</span></p>
+                    </a>
+                </div>
+                <div class="middle-side">
+                    <ul>
+                        <li class="items item1 mx-2"><a class="link" href='#home'>home</a></li>
+                        <li class="items item1 mx-2"><a class="link" href='#about'>about</a></li>
+                        <li class="items item1 mx-2"><a class="link" href='#services'>services</a></li>
+                        <li class="items item1 mx-2"><a class="link" href='#categories'>categories</a></li>
+                        <li class="items item1 mx-2"><a class="link" href='#menu'>menu</a></li>
+                        <li class="items item1 mx-2"><a class="link" href='#blogs'>blogs</a></li>
+                        <li class="items item1 mx-2"><a class="link" href='#reviews'>reviews</a></li>
+                        <li class="items item1 mx-2"><a class="link" href='#contact'>contact</a></li>
+                    </ul>
+                </div>
+                <div class=right-side>
+                    <ul>
+                        <li class="icons icon mx-2"><i class="fas fa-search" id = 'searchBtn'></i></li>
+                        <li class="icons icon mx-2 d-inline-block d-lg-none"><i class="fas fa-bars" id = 'bars'></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+    {% block body %}
+        {% endblock %}
     </body>
+<script>
+
+    let searchbtn = document.getElementById('searchBtn') ,
+        searchbar = document.getElementById('searchBar'),
+        formicon = document.getElementById('formIcon') ,
+        inputbar = document.getElementById('inputBar') ,
+        header = document.getElementById('header') ,
+        navbar = document.getElementsByClassName('link'),
+        title = document.getElementById('brand-title') ,
+        bars = document.getElementById('bars') ,
+        navbar2 = document.getElementById('_navbar') ,
+        close = document.getElementById('close-btn') ,
+        anchors = document.querySelectorAll('._navbar .navbar-content .items') ,
+        btnup = document.getElementById('btnup')
+        header.classList.add('bg-toggle')
+        header.classList.add('shadow')
+        title.classList.add('color-toggle')
+
+    searchbtn.addEventListener('click', _ =>
+    {
+        searchbtn.classList.toggle('fa-times-circle')
+        searchbar.classList.toggle('show')
+        inputbar.value = ''
+    })
+
+    inputbar.addEventListener('keydown', event =>
+    {
+        let key = event.key
+        if(key == 'Backspace')
+        {
+            if(inputbar.value.length <= 1)
+            {
+                formicon.classList.remove('icon-opacity')
+            }
+            else
+            {
+                formicon.classList.add('icon-opacity')
+            }
+        }
+        else
+        {
+            formicon.classList.add('icon-opacity')
+        }
+    })
+
+    colortoggle = _ =>
+    {
+        if(window.scrollY >= 0)
+        {
+            header.classList.add('bg-toggle')
+            header.classList.add('shadow')
+            title.classList.add('color-toggle')
+            for(let i = 0; i < navbar.length; ++i)
+            {
+                navbar[i].classList.add('color-toggle')
+            }
+        }
+    }
+
+    window.addEventListener('scroll', colortoggle)
+    window.addEventListener('DOMContentLoaded', colortoggle)
+
+    bars.addEventListener('click', _ =>
+    {
+        navbar2.classList.toggle('navbar-show')
+
+    })
+
+    close.addEventListener('click', _ =>
+    {
+        navbar2.classList.toggle('navbar-show')
+    })
+
+    anchors.forEach((a) =>
+    {
+        a.addEventListener('click', () => {navbar2.classList.toggle('navbar-show')})
+    })
+
+
+    checkbtn = _ =>
+    {
+        if(window.scrollY >= 200)
+            btnup.classList.add('showbtn')
+        else
+            btnup.classList.remove('showbtn')
+    }
+
+    window.addEventListener('scroll', checkbtn)
+    window.addEventListener('DOMContentLoaded', checkbtn)
+
+    btnup.addEventListener('click', () => window.scroll(0, 0))
+</script>
 </html>

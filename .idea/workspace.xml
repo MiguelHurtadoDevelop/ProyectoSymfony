@@ -5,7 +5,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aae3dfab-4332-4474-b274-fc2d52a98fdb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/17.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/about.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/best-quality.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/chips.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/contact.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/cover.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/daily-service.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/fast-foods.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/free-delivery.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/juices.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/services.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/user-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/user-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/user-3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,6 +227,10 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\ProyectoSymfony\ProyectoSymfony\vendor\doctrine\dbal\src\Types" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\ProyectoSymfony\ProyectoSymfony\public\img" />
+      <recent name="C:\xampp\htdocs\ProyectoSymfony\ProyectoSymfony\public" />
     </key>
   </component>
   <component name="RunManager">
