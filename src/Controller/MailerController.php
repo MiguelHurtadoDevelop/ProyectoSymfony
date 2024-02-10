@@ -40,8 +40,14 @@ class MailerController extends AbstractController
                                 <td>' . $carrito[$i]['precio'] . '</td>
                                 <td>' . $carrito[$i]['totalPorProducto'] . '</td>
                             </tr>';
+                            $total += $carrito[$i]['totalPorProducto'];
+                            
         }
 
+        $htmlcontent.= '<tr>
+                            <td colspan="3">Total</td>
+                            <td>'.$total.'</td>
+                        </tr>';
         $htmlContent .= '</table>';
     
         $email->html($htmlContent);
@@ -49,5 +55,23 @@ class MailerController extends AbstractController
     
         return new Response('Email sent!');
     }
+
+    #[Route('/email/enviado')]
+    public function sendEmailEnviado(MailerInterface $mailer, $email, $pedido_id): Response
+    {
+        $email = (new Email())
+            ->from('miguelhurtado.developer@gmail.com')
+            ->to($email)
+            ->subject('¡Su Pedido nº '.$pedido_id.' ha sido enviado!')
+            ->text('Gracias por realizar su pedido. En breve le enviaremos su pedido a la dirección indicada.');
+
+            $htmlContent = '<h1>¡Su Pedido ha sido enviado!</h1>';
+            
+            $htmlContent .= 'Pulse <a href="http://127.0.0.1:8000/pedidos/'.$pedido_id.'">aqui</a> para ver los detalles de su pedido.';
+            $email->html($htmlContent);
+
+            $mailer->send($email);
     
+        return new Response('Email sent!');
+    }
 }

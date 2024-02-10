@@ -13,6 +13,10 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Entity\Productos;
 use App\Entity\Pedidosproductos;
+use App\Controller\MailerController;  
+use Symfony\Component\Mailer\MailerInterface;  
+use App\Entity\Restaurante;
+
 
 
 #[Route('/pedidos')]
@@ -153,11 +157,16 @@ class PedidosController extends AbstractController
     }
 
     #[Route('/enviar-pedido/{id}', name: 'app_pedidos_enviar_pedido')]
-    public function enviarPedido($id,EntityManagerInterface $entityManager): Response
+    public function enviarPedido($id,EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $pedido = $entityManager->getRepository(Pedidos::class)->find($id);
         $pedido->setEnviado(1);
         $entityManager->flush();
+
+        //enviar email
+        $email = $entityManager->getRepository(Restaurante::class)->find($pedido->getRestaurante()->getId())->getEmail();
+        $mailerController = new MailerController();
+        $response = $mailerController->sendEmailEnviado($mailer, $email, $id);
 
 
         return $this->redirectToRoute('app_pedidos_index');
