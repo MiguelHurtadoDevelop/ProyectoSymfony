@@ -27,7 +27,7 @@ class ProductosType extends AbstractType
                         'message' => 'Por favor, introduce un nombre.',
                     ]),
                     new Regex([
-                        'pattern' => '/^[a-zA-ZñÑ]+$/u',
+                        'pattern' => '/^[a-zA-ZñÑ\s]+$/u',
                         'message' => 'El nombre solo debe contener letras.',
                     ]),
                 ]
