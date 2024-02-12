@@ -40,7 +40,26 @@ class ProductosType extends AbstractType
                 ]
             ])            
             ->add('peso')
-            ->add('stock')
+            ->add('stock', NumberType::class, [
+                'constraints' => [
+                    new Type([
+                        'type' => 'numeric',
+                        'message' => 'El stock debe ser un número.',
+                    ]),
+                    new NotBlank([
+                        'message' => 'Por favor, introduce un valor para el stock.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^\d+$/',
+                        'message' => 'El stock debe ser un número entero positivo.',
+                    ]),
+                    
+                    new \Symfony\Component\Validator\Constraints\GreaterThan([
+                        'value' => 0,
+                        'message' => 'El stock debe ser mínimo 1.',
+                    ]),
+                ],
+            ])
             ->add('precio', NumberType::class, [
                 'scale' => 2,'constraints' => [
                 new Type([
