@@ -14,6 +14,8 @@ class MailerController extends AbstractController
     #[Route('/email')]
     public function sendEmail(MailerInterface $mailer, $email, $carrito, $pedido_id): Response
     {
+
+        $total = 0;
         $email = (new Email())
             ->from('miguelhurtado.developer@gmail.com')
             ->to($email)
@@ -44,7 +46,7 @@ class MailerController extends AbstractController
                             
         }
 
-        $htmlcontent.= '<tr>
+        $htmlContent .= '<tr>
                             <td colspan="3">Total</td>
                             <td>'.$total.'</td>
                         </tr>';
