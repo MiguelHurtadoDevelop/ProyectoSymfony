@@ -48,7 +48,7 @@ class MailerController extends AbstractController
 
         $htmlContent .= '<tr>
                             <td colspan="3">Total</td>
-                            <td>'.$total.'</td>
+                            <td>'.$total.'€</td>
                         </tr>';
         $htmlContent .= '</table>';
     
