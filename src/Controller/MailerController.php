@@ -8,19 +8,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mime\Address;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 class MailerController extends AbstractController
 {
     #[Route('/email')]
     public function sendEmail(MailerInterface $mailer, $email, $carrito, $pedido_id): Response
     {
+        
 
         $total = 0;
-        $email = (new Email())
-            ->from('miguelhurtado.developer@gmail.com')
-            ->to($email)
-            ->subject('Confirmación de Pedido nº'.$pedido_id.'')
-            ->text('Gracias por realizar su pedido. En breve le enviaremos su pedido a la dirección indicada.');
+        $email = (new TemplatedEmail())
+        ->from(new Address('miguelhurtado.developer@gmail.com', 'Il Ristorante'))
+        ->to($email)
+        ->subject('Confirmación de Pedido nº'.$pedido_id.'');
         
         $htmlContent =
          '
@@ -61,11 +63,10 @@ class MailerController extends AbstractController
     #[Route('/email/enviado')]
     public function sendEmailEnviado(MailerInterface $mailer, $email, $pedido_id): Response
     {
-        $email = (new Email())
-            ->from('miguelhurtado.developer@gmail.com')
-            ->to($email)
-            ->subject('¡Su Pedido nº '.$pedido_id.' ha sido enviado!')
-            ->text('Gracias por realizar su pedido. En breve le enviaremos su pedido a la dirección indicada.');
+        $email = $email = (new TemplatedEmail())
+        ->from(new Address('miguelhurtado.developer@gmail.com', 'Il Ristorante'))
+        ->to($email)
+        ->subject('¡Su Pedido nº '.$pedido_id.' ha sido enviado!');            
 
             $htmlContent = '<h1>¡Su Pedido ha sido enviado!</h1>';
             

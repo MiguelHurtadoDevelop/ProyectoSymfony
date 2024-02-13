@@ -10,10 +10,12 @@ security:
                 class: App\Entity\Restaurante
                 property: email
     firewalls:
+        
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            
             lazy: true
             provider: app_user_provider
             form_login:
@@ -22,6 +24,8 @@ security:
                 enable_csrf: true
             logout:
                 path: app_logout
+
+            access_denied_url: '/'
 
             user_checker: App\Security\UserIsVerified    
                 # where to redirect after logout
@@ -36,8 +40,17 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        
+        - { path: '^/categorias/\d+$', roles: ROLE_USER }
+        - { path: '^/categorias', roles: ROLE_ADMIN }
+        - { path: '^/register', roles: ROLE_ADMIN }
+        - { path: '^/pedidosproductos/crearLineasPedido', roles: ROLE_USER }
+        - { path: '^/pedidos/realizar-pedido', roles: ROLE_USER }
+        - { path: '^/pedidos/\d+$', roles: ROLE_USER }
+        - { path: '^/pedidos/mostrarMisPedidos/\d+$', roles: ROLE_USER }
+        - { path: '^/pedidos', roles: ROLE_ADMIN }
+
+         
 
 when@test:
     security:
