@@ -49,6 +49,7 @@ security:
         - { path: '^/pedidos/\d+$', roles: ROLE_USER }
         - { path: '^/pedidos/mostrarMisPedidos/\d+$', roles: ROLE_USER }
         - { path: '^/pedidos', roles: ROLE_ADMIN }
+        
 
          
 
