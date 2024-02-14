@@ -49,6 +49,10 @@ security:
         - { path: '^/pedidos/\d+$', roles: ROLE_USER }
         - { path: '^/pedidos/mostrarMisPedidos/\d+$', roles: ROLE_USER }
         - { path: '^/pedidos', roles: ROLE_ADMIN }
+        - { path: '^/productos/\d+$', roles: ROLE_USER }
+        - { path: '^/productos', roles: ROLE_ADMIN }
+        - { path: '^/carrito', roles: ROLE_USER }
+
         
 
          
